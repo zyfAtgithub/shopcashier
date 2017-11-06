@@ -1,0 +1,26 @@
+[
+    {
+        "index": 1,
+        "barcode": "6922868286096",
+        "proname": "芬达",
+        "price": "2.00",
+        "count": "3",
+        "subtotal": "6"
+    },
+    {
+        "index": 1,
+        "barcode": "6922868286096",
+        "proname": "芬sss达",
+        "price": "2.00",
+        "count": "3",
+        "subtotal": "6"
+    },
+    {
+        "index": 1,
+        "barcode": "6922868286096",
+        "proname": "芬达",
+        "price": "2.00",
+        "count": "3",
+        "subtotal": "6"
+    }
+]
