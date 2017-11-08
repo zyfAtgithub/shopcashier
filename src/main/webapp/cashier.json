@@ -3,48 +3,42 @@
         "index": 1,
         "barcode": "6922868286096",
         "proname": "芬达",
-        "price": "4.00",
-        "count": "3",
-        "subtotal": "12.00"
+        "price": "8.00",
+        "count": "3"
     },
     {
         "index": 2,
         "barcode": "6909995113709",
         "proname": "旺旺小小酥",
         "price": "11.50",
-        "count": "1",
-        "subtotal": "9.50"
+        "count": "1"
     },
     {
         "index": 3,
         "barcode": "6924187832657",
         "proname": "恰恰香瓜子",
         "price": "9.50",
-        "count": "1",
-        "subtotal": "9.50"
+        "count": "1"
     },
     {
         "index": 4,
         "barcode": "69012941528",
         "proname": "六神花露水",
         "price": "12.30",
-        "count": "1",
-        "subtotal": "12.30"
+        "count": "1"
     },
     {
         "index": 5,
         "barcode": "6932835327721",
         "proname": "真彩签字笔",
         "price": "2.00",
-        "count": "10",
-        "subtotal": "20.00"
+        "count": "10"
     },
     {
         "index": 6,
         "barcode": "6922868286096",
         "proname": "冰柠檬",
         "price": "2.00",
-        "count": "3",
-        "subtotal": "6.00"
+        "count": "3"
     }
 ]

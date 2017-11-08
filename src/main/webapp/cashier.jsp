@@ -97,7 +97,8 @@ $('#dataTb').bootstrapTable({
     		width:200,
     	},
     ],
-});.#data/input正整数
+});
+//input正整数
  function forPositiveInt(input) {
 	if ($(input).val().length == 1) {
 		$(input).val($(input).val().replace(/[^1-9]/g, '0'));

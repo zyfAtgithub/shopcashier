@@ -3,6 +3,8 @@
 <head>
 	<title>收银台</title>
 	<link rel="stylesheet" href="webResources/plugins/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="webResources/plugins/bootstrap-table/bootstrap-table.min.css">
+	<link rel="stylesheet" href="webResources/plugins/layui/css/layui.css">
 	<style type="text/css">
 		.panel>table.table>tbody>tr>th, .panel>table.table>tbody>tr>td {
 			font-size: 14px;
@@ -10,11 +12,23 @@
 		.branch-nav-top{
 		    font-size: 13px;
 		    display: block;
-		    color: #9d9d9d;
+		    color: #ffffff;
 		    padding: 15px 15px;
 		}
 		.content{
 			margin-top:60px;
+		}
+		
+		nav.navbar-inverse {
+		    border:none;
+		    border-radius: 0px;
+		}
+		
+		.panel-shop-cart {
+			height:350px;
+		}
+		.balance-info{
+			display:none;
 		}
 	</style>
 </head>
@@ -37,70 +51,34 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-9">
-				<div class="panel panel-success">
+				<div class="panel panel-success panel-shop-cart">
 					<div class="panel-heading">
 						<span class="glyphicon glyphicon-shopping-cart"></span> 消费信息
+						<button type="button" class="btn btn-default pull-right" id="refresh-btn" title="刷新">
+						  <span class="glyphicon glyphicon-refresh"></span>
+						</button>
 					</div>
-					<table class="table">
-						<thead>
-							<tr>
-								<th>序号</th>
-								<th>商品条形码</th>
-								<th>商品名称</th>
-								<th>单价</th>
-								<th>数量</th>
-								<th>小计</th>
-								<th>操作</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th>1</th>
-								<td>6922868286096</td>
-								<td>芬达</td>
-								<td>4.00</td>
-								<td>3</td>
-								<td>12.00</td>
-								<td><button type="button" class="btn btn-xs btn-danger">删除</button></td>
-							</tr>
-							<tr>
-								<th>2</th>
-								<td>6909995113709</td>
-								<td>旺旺小小酥</td>
-								<td>11.50</td>
-								<td>1</td>
-								<td>9.50</td>
-								<td><button type="button" class="btn btn-xs btn-danger">删除</button></td>
-							</tr>
-							<tr>
-								<th>3</th>
-								<td>6924187832657</td>
-								<td>恰恰香瓜子</td>
-								<td>9.50</td>
-								<td>1</td>
-								<td>9.50</td>
-								<td><button type="button" class="btn btn-xs btn-danger">删除</button></td>
-							</tr>
-							<tr>
-								<th>4</th>
-								<td>69012941528</td>
-								<td>六神花露水</td>
-								<td>12.30</td>
-								<td>1</td>
-								<td>12.30</td>
-								<td><button type="button" class="btn btn-xs btn-danger">删除</button></td>
-							</tr>
-						</tbody>
-					</table>
+					<table id="dataTb"></table>
 				</div>
 			</div>
 			<div class="col-lg-3">
 				<div class="panel panel-info">
 					<div class="panel-heading" style="">
-						<span class="glyphicon glyphicon-user"></span>会员信息
+						<div class="input-group col-md-12" style="margin-top:0px positon:relative">  
+					       <input type="text" class="form-control"placeholder="请输入会员卡号" />  
+					            <span class="input-group-btn">  
+					               <button class="btn btn-info btn-search">
+					               		<span class="glyphicon glyphicon-search"></span>&nbsp;
+					               	</button>  
+					            </span>  
+					 	</div>  
 					</div>
 					<table class="table table-bordered table-hover table-condensed">
 						<tbody>
+							<tr class="">
+								<th>会员号</th>
+								<td>56089760611</td>
+							</tr>
 							<tr class="">
 								<th>会员姓名</th>
 								<td>王晓雨</td>
@@ -120,17 +98,168 @@
 						</tbody>
 					</table>
 				</div>
+				
+				<div class="panel panel-info">
+					<div class="panel-heading" style="">
+						<span class="glyphicon glyphicon-pencil"></span> 结算
+					</div>
+					<table class="table table-bordered">
+						<tbody>
+							<tr>
+								<th>应收</th>
+								<td>1289.00</td>
+								<td rowspan="3" align="center" valign="middle" style="padding: 30px">
+									<button class="btn btn-danger btn-lg" id="balance">结  算</button>
+								</td>
+							</tr>
+							<tr>
+								<th>实收</th>
+								<td>1300.00</td>
+							</tr>
+							<tr>
+								<th>找零</th>
+								<td>11.00</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 		
 		<div class="row">
-			<div class="col-lg-12" style="height:100px;border:1px solid gray;">
+			<div class="col-lg-3">
+			
+			</div>
+			<div class="col-lg-4">
+				<div class="alert alert-success alert-dismissable balance-info">
+					结算完成！  
+				</div>
 			</div>
 		</div>
 	</div>
 </body>
 
 <script type="text/javascript" src="webResources/js/jquery-2.1.1.min.js"></script>
-<script type="text/javascript"
-	src="webResources/plugins/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="webResources/plugins/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="webResources/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="webResources/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+<script src="webResources/plugins/layui/layui.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#balance").click(function(){
+			$(".balance-info").fadeIn();
+			$(".balance-info").fadeOut(6000);
+		});
+		
+	});
+
+	$('#dataTb').bootstrapTable({
+	    url: 'cashier.json',
+	    height:309,
+	    showFooter:true,
+	    iconsPrefix:'glyphicon',
+	    striped:true,
+	    columns:[
+	    	{
+	    		field:"index",
+	    		title:"序号",
+	    		width:50,
+	    		align:"center",
+	    		valign:'middle',
+	    	},
+	    	{
+	    		field:"barcode",
+	    		title:"商品条形码",
+	    		width:100,
+	    		align:"center",
+	    		valign:'middle',
+	    	},
+	    	{
+	    		field:"proname",
+	    		title:"商品名称",
+	    		width:160,
+	    		align:"center",
+	    		valign:'middle',
+	    	},
+	    	{
+	    		field:"price",
+	    		title:"单价（元）",
+	    		width:120,
+	    		align:"center",
+	    		valign:'middle',
+	    	},
+	    	{
+	    		field:"count",
+	    		title:"数量",
+	    		align:"center",
+	    		valign:'middle',
+	    		width:120,
+	    		formatter:function(value, row, index){
+	    			var editElem = '<input type="number" data-index='+index+' class="form-control" min="1" ' +
+	    			'style="height: 100%; margin: 0px;" value="'+value+'" name="count"'+
+	    			' onkeyup="forPositiveInt(this);" onblur="forPositiveInt(this);" onchange="countChg(this);"/>';
+	    			return editElem;
+	    		},
+	    		footerFormatter:'总计',
+	    	},
+	    	{
+	    		field:"subtotal",
+	    		title:"小计",
+	    		width:160,
+	    		align:"center",
+	    		valign:'middle',
+	    		formatter:function(value, row, index){
+	    			var subtotal = Number(row.price) * Number(row.count);
+	    			return  subtotal;
+	    		},
+	    		footerFormatter:function(value){
+	    			var total = 0;
+	    			for (var i in value) {
+	    				var subtotal = Number(value[i].price) * Number(value[i].count);
+	    				total += subtotal;
+	    			}
+	    			return total;
+	    		},
+	    	},
+	    	{
+	    		field:"operation",
+	    		title:"操作",
+	    		formatter:function(value, row, index){
+	    			return '<button type="button" class="btn btn-xs btn-danger" onclick="delgoods('+index+');">删除</button>';
+	    		},
+	    		width:80,
+	    		align:"center",
+	    		valign:'middle',
+	    	},
+	    ],
+	});
+	
+	//input正整数
+	 function forPositiveInt(input) {
+		if ($(input).val().length == 1) {
+			$(input).val($(input).val().replace(/[^1-9]/g, '0'));
+		} else {
+			$(input).val($(input).val().replace(/\D/g, ''));
+		}
+		if (!$(input).val()) {//为空时，置1
+			$(input).val(1);
+		}
+	 }
+	
+	//input change
+	function countChg(input) {
+		var index = $(input).attr('data-index');
+		
+		
+	}
+	
+	function delgoods(index) {
+		console.log(index);
+	}
+	
+	$("#refresh-btn").click(function(){
+		//$('#dataTb').refresh();
+		$('#dataTb').bootstrapTable('refresh', {});
+	});
+</script>
 </html>
